@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import fi.jyu.mit.fxgui.ComboBoxChooser?>
+<?import fi.jyu.mit.fxgui.ListChooser?>
+<?import fi.jyu.mit.fxgui.StringGrid?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxSopparekisteri.SopparekisteriGUIController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Tiedosto">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#handleTallenna" text="Talleta">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#handleLopeta" text="Poistu">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Lisää">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#handleUusiRuoka" text="Ruoka" />
+                  <MenuItem mnemonicParsing="false" onAction="#uusiRaakaAine" text="Raaka-aine" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Apua">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#handleTietoa" text="Tietoa" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <left>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <center>
+            <ListChooser fx:id="chooserRuuat" prefHeight="500.0" rivit="Makaronilaatikko&#10;Makkarakeitto&#10;Peruja&#10;Perunamuussi&#10;" BorderPane.alignment="CENTER" />
+         </center>
+         <top>
+            <VBox BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" maxWidth="300.0" text="Hakuehto" />
+                  <ComboBoxChooser fx:id="cbKentat" maxWidth="300.0" rivit="ruoka" />
+                  <TextField fx:id="hakuehto" onKeyReleased="#handleHakuehto" />
+                  <Label alignment="CENTER" maxWidth="300.0" text="Ruoka" />
+               </children>
+            </VBox>
+         </top>
+      </BorderPane>
+   </left>
+   <bottom>
+      <HBox spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button onAction="#handleUusiRuoka" text="_Lisää ruoka">
+               <tooltip>
+                  <Tooltip text="Lisää uusi ruoka" />
+               </tooltip>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#handlePoista" text="Poista ruoka" HBox.hgrow="ALWAYS">
+               <tooltip>
+                  <Tooltip text="Tallenna muutokset" />
+               </tooltip>
+            </Button>
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleMuokkaa" text="Muokkaa" HBox.hgrow="ALWAYS" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>  
+   <right>
+      <BorderPane BorderPane.alignment="CENTER">
+         <top>
+            <Label text="Raaka-aineet" BorderPane.alignment="CENTER" />
+         </top>        
+         <center>
+            <StringGrid fx:id="tableAineet" rivit="aine|määrä|suure&#10;jauheliha|400|grammaa&#10;makaroni|300|grammaa&#10;suola|1|teelusikka&#10;&#10;" BorderPane.alignment="CENTER" />
+         </center>
+         <bottom>
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER_RIGHT">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#handleUusiAine" text="Lisää raaka-aine">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#handlePoistaAine" text="Poista raaka-aine" />
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </HBox>
+         </bottom>       
+      </BorderPane>
+   </right>
+   <center>
+      <SplitPane prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <center>
+                  <ScrollPane fx:id="panelRuoka" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </center>
+               <top>
+                  <Label text="Ohje" BorderPane.alignment="CENTER">
+                     <graphic>
+                        <TextField fx:id="editNimi" editable="false" />
+                     </graphic></Label>
+               </top>
+            </BorderPane>
+        </items>
+      </SplitPane>
+   </center>
+</BorderPane>
